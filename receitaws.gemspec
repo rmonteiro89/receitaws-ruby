@@ -1,17 +1,16 @@
-# coding: utf-8
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.unshift(File.join(File.dirname(__FILE__), 'lib'))
+
 require "receitaws/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "receitaws"
   spec.version       = Receitaws::VERSION
-  spec.authors       = ["Raphael Monteiro"]
-  spec.email         = ["rmonteiro89@hotmail.com"]
+  spec.authors       = ["Raphael Monteiro", "Luis Henrique"]
+  spec.email         = ["rmonteiro89@hotmail.com", "luis.lhsc@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Colecao de metodos para consumir o API ReceitaWS"
+  spec.description   = "Api ReceitaWS"
+  spec.homepage      = "https://github.com/rmonteiro89/receitaws-ruby.git"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -23,14 +22,14 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "webmock", "~> 2.0"
+  spec.add_dependency "rest-client", "~> 2.0"
+
+  spec.files = Dir['lib/**/*.rb']
+  spec.test_files    = `git ls-files -- test/*`.split("\n")
+  spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  spec.require_paths = ['lib']
 end
